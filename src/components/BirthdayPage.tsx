@@ -13,7 +13,7 @@ const REASONS = [
 
 // ====== FOTO YANG AKAN TERLEMPAR DARI KUE ======
 const CAKE_PHOTOS = [
-  { src: '/public/6.jpg', caption: '' },
+  { src: '/6.jpg', caption: '' },
   { src: '/2.jpg', caption: '🌸' },
   { src: '/3.jpg', caption: '😊' },
   { src: '/4.jpg', caption: '🌅' },
