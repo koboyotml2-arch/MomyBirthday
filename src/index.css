@@ -1,0 +1,265 @@
+@import "tailwindcss";
+
+/* ====== BASE ====== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1a0033 0%, #330033 50%, #4a0033 100%);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.font-great-vibes { font-family: 'Great Vibes', cursive; }
+.font-dancing { font-family: 'Dancing Script', cursive; }
+
+/* ====== ANIMATIONS ====== */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255,105,180,0.5)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 40px rgba(255,105,180,0.9)); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+}
+@keyframes shine {
+  0% { left: -100%; }
+  50%, 100% { left: 200%; }
+}
+@keyframes flicker {
+  0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+  100% { transform: translateX(-50%) scale(1.1) rotate(2deg); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in-up { animation: fade-in-up 1s ease both; }
+.animate-fade-in-down { animation: fade-in-down 1s ease both; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-gradient { 
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite; 
+}
+.animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 4s linear infinite; }
+.animate-slide-in { animation: slide-in-left 0.6s ease both; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-1000 { animation-delay: 1s; }
+
+/* ====== GRADIENT TEXT ====== */
+.text-gradient-pink {
+  background: linear-gradient(45deg, #ff6b9d, #ffa8cc, #ffd1e3, #ffa8cc, #ff6b9d);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+/* ====== SHINE BUTTON ====== */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shine 3s infinite;
+}
+
+/* ====== SCROLLBAR ====== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-thumb { background: #ff80ab; border-radius: 3px; }
+
+/* ====== FLYING PHOTOS ANIMATION ====== */
+@keyframes fly-in {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(0.3);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation)) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float-around {
+  0%, 100% {
+    transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation)) scale(1);
+  }
+  25% {
+    transform: translate(calc(var(--end-x) + 20px), calc(var(--end-y) - 15px)) rotate(calc(var(--rotation) + 3deg)) scale(1.02);
+  }
+  50% {
+    transform: translate(calc(var(--end-x) - 10px), calc(var(--end-y) + 10px)) rotate(calc(var(--rotation) - 2deg)) scale(0.98);
+  }
+  75% {
+    transform: translate(calc(var(--end-x) + 15px), calc(var(--end-y) + 5px)) rotate(calc(var(--rotation) + 2deg)) scale(1.01);
+  }
+}
+
+.flying-photo {
+  animation: fly-in 2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             float-around 4s ease-in-out infinite 2s;
+  will-change: transform, opacity;
+}
+
+/* ====== FLYING PHOTOS (versi baru, memenuhi layar) ====== */
+@keyframes fly-in {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scale(0.2);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation)) scale(var(--scale, 1));
+    opacity: 1;
+  }
+}
+
+@keyframes float-around {
+  0%, 100% {
+    transform: translate(var(--end-x), var(--end-y)) rotate(var(--rotation)) scale(var(--scale, 1));
+  }
+  25% {
+    transform: translate(calc(var(--end-x) + 15px), calc(var(--end-y) - 10px)) rotate(calc(var(--rotation) + 2deg)) scale(calc(var(--scale, 1) * 1.03));
+  }
+  50% {
+    transform: translate(calc(var(--end-x) - 8px), calc(var(--end-y) + 8px)) rotate(calc(var(--rotation) - 1.5deg)) scale(calc(var(--scale, 1) * 0.97));
+  }
+  75% {
+    transform: translate(calc(var(--end-x) + 10px), calc(var(--end-y) + 5px)) rotate(calc(var(--rotation) + 1.5deg)) scale(calc(var(--scale, 1) * 1.02));
+  }
+}
+
+.flying-photo {
+  animation: fly-in 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             float-around 5s ease-in-out infinite 1.8s;
+  will-change: transform, opacity;
+}
+
+/* ====== BACKGROUND SLIDESHOW ====== */
+@keyframes fade-in-slow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+
+.animate-fade-in-slow {
+  animation: fade-in-slow 2s ease-in forwards;
+}
+
+.animate-slow-zoom {
+  animation: slow-zoom 10s ease-in-out infinite alternate;
+}
+/* ====== CAKE POP PHOTOS ANIMATION ====== */
+@keyframes pop-out {
+  0% {
+    transform: translate(0, 0) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+}
+
+@keyframes float-fade {
+  0% {
+    transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
+  50% {
+    transform: translate(var(--tx), calc(var(--ty) - 15px)) scale(1.05) rotate(calc(var(--rot) + 3deg));
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), calc(var(--ty) - 30px)) scale(0.8) rotate(var(--rot));
+  }
+}
+
+.cake-pop-photo {
+  /* Animasi melompat keluar (0.8s) lalu melayang dan menghilang (3s) */
+  animation: pop-out 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             float-fade 3s ease-in-out 0.8s forwards;
+  will-change: transform, opacity;
+}
+/* ====== CAKE THROW PHOTOS ANIMATION ====== */
+@keyframes throw-out {
+  0% {
+    transform: translate(0, 0) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1.2) rotate(0deg);
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0.8) rotate(var(--rot));
+    opacity: 0;
+  }
+}
+
+.cake-throw-photo {
+  animation: throw-out 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: transform, opacity;
+}
+
+/* ====== SHAKE ANIMATION FOR CAKE ====== */
+@keyframes shake {
+  0%, 100% { transform: translateX(0) scale(0.9); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px) scale(0.9); }
+  20%, 40%, 60%, 80% { transform: translateX(5px) scale(0.9); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
